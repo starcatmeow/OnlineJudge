@@ -94,7 +94,7 @@ class UserProfile(models.Model):
     github = models.TextField(null=True)
     school = models.TextField(null=True)
     major = models.TextField(null=True)
-    language = models.TextField(null=True)
+    language = models.TextField(default="zh-CN")
     # for ACM
     accepted_number = models.IntegerField(default=0)
     # for OI
