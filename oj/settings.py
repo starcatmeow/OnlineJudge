@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 import os
 import raven
+
 from copy import deepcopy
 from utils.shortcuts import get_env
 
@@ -35,6 +36,7 @@ VENDOR_APPS = [
     'rest_framework',
     'django_dramatiq',
     'django_dbconn_retry',
+    'corsheaders',
 ]
 
 if production_env:
@@ -57,6 +59,7 @@ INSTALLED_APPS = VENDOR_APPS + LOCAL_APPS
 
 MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -244,3 +247,9 @@ RAVEN_CONFIG = {
 }
 
 IP_HEADER = "HTTP_X_REAL_IP"
+
+CORS_ORIGIN_REGEX_WHITELIST = (
+    r'http://localhost(:-?[1-9]\d*)?',
+    r'http://127.0.0.1(:-?[1-9]\d*)?',
+)
+CORS_ALLOW_CREDENTIALS = True
